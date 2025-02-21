@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+</head>
+<body>
+    <h1>Calculadora Simples</h1>
+
+    <form action="somar">
+        <label for="valora">Valor A</label>
+        <input type="number" name="valora" id="valora" required>
+        <br>
+
+        <label for="valorb">Valor B</label>
+        <input type="number" name="valorb" id="valorb" required>
+        <br>
+
+        <label for="operacao">Operação</label>
+        <select name="operacao" id="operacao">
+            <option value="">Selecione uma operação</option>
+            <option value="somar">Somar</option>
+            <option value="subtrair">Subtrair</option>
+            <option value="multiplicar">Multiplicar</option>
+            <option value="dividir">Dividir</option>
+        </select>
+        <br>
+        <button type="submit">Executar</button>
+        <button id="clean" type="reset">Limpar</button>
+    </form>
+
+    <span id="resultado">O resultado aqui:</span>
+    <br>
+
+    <script>
+        const operacao = (event) => {
+            event.preventDefault(); // Impede o envio do formulário
+            let valora = document.getElementById('valora').value;
+            let valorb = document.getElementById('valorb').value;
+            let operacao = document.getElementById('operacao').value;
+            let limpar = document.getElementById('clean');
+            let resultadoElemento = document.getElementById('resultado'); // Pega o elemento HTML
+
+            console.log(valora, valorb, operacao);
+
+            if (operacao === 'somar') {
+                resultadoElemento.innerHTML = Number(valora) + Number(valorb);
+            } else if (operacao === 'subtrair') {
+                resultadoElemento.innerHTML = Number(valora) - Number(valorb); // Subtrai
+            } else if (operacao === 'multiplicar') {
+                resultadoElemento.innerHTML = Number(valora) * Number(valorb); // Multiplica
+            } else if (operacao === 'dividir') {
+                resultadoElemento.innerHTML = Number(valora) / Number(valorb); // Divide
+            } else {
+                resultadoElemento.innerHTML = 'Selecione uma operação';
+                console.log('Selecione uma operação');
+            }
+        }
+
+        const limpar = document.getElementById('clean');
+        limpar.addEventListener('click', () => {
+            document.getElementById('valora').value = '';
+            document.getElementById('valorb').value = '';
+        });
+        // Adiciona um listener de evento para o envio do formulário
+        const form = document.querySelector('form');
+        form.addEventListener('submit', operacao);
+    </script>
+</body>
+</html>
